@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,13 +16,21 @@ namespace EcommerceApplication.Models
             Orders = new HashSet<Order>();
 
         }
+
+        [ScaffoldColumn(false)]
         public int CustomerId { get; set; }
+
+        [Required(ErrorMessage = "Customer Name is require")]
         public string CustomerName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
+
+        [DataType(DataType.PostalCode)]
         public int PostalCode { get; set; }
+        
+        [EmailAddress]
         public string EmailAddress { get; set; }
         public DateTime? DateEntered { get; set; }
         public virtual ICollection<CartItem> CartItems { get; set; }
